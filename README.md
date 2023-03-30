@@ -26,10 +26,20 @@ Now, right click on craftableBandage and create New File... main.lua. This is th
 
 ## Variables and Functions 
 
-I'm gonna start off by showing you how to create a variable in Lua. So this mod is Craftable Bandages. So I'm going to create a local variable called `bandageId` and set it to the id of the OAAB bandages. Load OAAB_Data.esm in The Construction Set. The bandages are in the Alchemy tab, with CSSE, we can filter Bandage and find them very easily. There are actually two bandage objects in OAAB so create two local variables `bandageId1` and `bandageId2`.
+I'm gonna start off by showing you how to create a variable in Lua. So this mod is Craftable Bandages. So I'm going to create a local variable called `bandageId` and set it to the id of the OAAB bandages. Load OAAB_Data.esm in The Construction Set. The bandages are in the Alchemy tab, with CSSE, we can filter Bandage and find them very easily. There are actually two bandage objects in OAAB. I'm gonna create just one for now. `
+
 ```
 local bandageId1 = "AB_alc_HealBandage01"
+```
+
+Let's look at a few components about this. In Lua, variables are global by default but you probably don't wanna that. We need to specify that it is a local variable. `bandageId1` is the variable name. Different people have different naming conventions. I tend to use camelCase, that is, no separator between words, first letter lowercased, and all other capitalized. This equal symbol is the assign operator and we're assigning it to a string. A string is a collection of characters like AB_alc_HealBandage01 and it is closed by a pair of quotation marks. 
+
+I would like this tutorial to be as interactive as possible so I encourage you follow along. Throughout this tutorial, I will tell you what is the next thing to do and I want you to pause the video and try to implement what I say yourself before you watch what I'm gonna do. So you can see if we implement the same way. 
+
+Let's start simple. This is the first thing I want you to do: see if you can make another local variable on the next line, called bandageId2 and set it to equal AB_alc_HealBandage02. 
+
+```
 local bandageId2 = "AB_alc_HealBandage02"
 ```
 
-So let's look at a few components about this. In Lua, variables are global by default but you probably don't wanna do that. We need to specify that it is a local variable. `bandageId1` is the variable name. 
+Now, I'm going to talk about functions.
