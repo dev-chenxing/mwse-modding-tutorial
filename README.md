@@ -1,6 +1,12 @@
 # Morrowind Modding Tutorial with MWSE-Lua
 
-In this tutorial series, You will learn the basics of [MWSE-Lua](https://mwse.github.io/MWSE/) modding and you don't need any previous programming experience to follow along. I will be guiding you every step of the way to make a mod called Craftable Bandage. So let's get started!
+In this tutorial series, You will learn the basics of [MWSE-Lua](https://mwse.github.io/MWSE/) modding and you don't need any previous programming experience to follow along. I will be guiding you every step of the way to make a mod called Craftable Bandage.
+
+## Craftable Bandages
+
+This mod will allows you to use your bushcrafting skill to craft bandages from OAAB_Data and the effect varies depending on your Survival skill. 
+
+So we need to install OAAB_Data, The Crafting Framework, Skill Module, and Ashfall. 
 
 ## Introduction
 
@@ -14,12 +20,16 @@ Now, we are going to create the folder for our MWSE mod. On the left side of the
 
 Right Click on mods -> New Folder... Here, you need to enter your modder name. I am Amalie so I'll type Amalie here. Then, right click on the folder you just created, New Folder... again. This time we need to enter the name for the mod that we're gonna be creating, Craftable Bandage.
 
-This will be a mod that allows players to craft a bandage that can restore your health and you will be able to see the bandage on the player's wrist. 
-
 You can put space between words or do camelCase like I did here. Just don't put dot in your folder name. 
 
 Now, right click on craftableBandage and create New File... main.lua. This is the the main file of your mod and it must be named main.lua. 
 
-## 
+## Variables and Functions 
 
-I'm gonna start off by showing you how to create a variable in Lua. 
+I'm gonna start off by showing you how to create a variable in Lua. So this mod is Craftable Bandages. So I'm going to create a local variable called `bandageId` and set it to the id of the OAAB bandages. Load OAAB_Data.esm in The Construction Set. The bandages are in the Alchemy tab, with CSSE, we can filter Bandage and find them very easily. There are actually two bandage objects in OAAB so create two local variables `bandageId1` and `bandageId2`.
+```
+local bandageId1 = "AB_alc_HealBandage01"
+local bandageId2 = "AB_alc_HealBandage02"
+```
+
+So let's look at a few components about this. In Lua, variables are global by default but you probably don't wanna do that. We need to specify that it is a local variable. `bandageId1` is the variable name. 
