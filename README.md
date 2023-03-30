@@ -42,4 +42,11 @@ Let's start simple. This is the first thing I want you to do: see if you can mak
 local bandageId2 = "AB_alc_HealBandage02"
 ```
 
-Now, I'm going to talk about functions.
+Now, I'm going to talk about functions. A function is a set of code which only runs when it is called. Let's define an empty function called registerBushcraftingRecipe.
+
+``` 
+local function registerBushcraftingRecipe()
+end
+```
+
+You can see the block is greyed out. Hover over it, it tells you that the local function registerBushcraftingRecipe is never used. 
