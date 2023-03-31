@@ -1,3 +1,10 @@
+--[[
+	Mod: Craftable Bandage
+	Author: Amalie
+	
+	This mod allows you to craft OAAB bandages with novice bushcrafting skill.
+	It serves as an alternative to alchemy and restoration.
+]] --
 local ashfall = include("mer.ashfall.interop")
 local CraftingFramework = include("CraftingFramework")
 local skillModule = include("OtherSkills.skillModule")
@@ -34,10 +41,9 @@ local function registerBushcraftingRecipe(e)
 			},
 		}
 		bushcraftingActivator:registerRecipes(recipes)
+		log:info("Bandage recipe registered")
 	end
 end
-event.register("Ashfall:ActivateBushcrafting:Registered",
-               registerBushcraftingRecipe)
 
 ---@param ref tes3reference
 ---@return integer duration
@@ -93,7 +99,8 @@ local function removeBandageHealing(e)
 	end
 end
 
-local function initialized()
+--- @param e initializedEventData
+local function initializedCallback(e)
 	if not config.enabled then
 		return
 	end
@@ -106,12 +113,15 @@ local function initialized()
 	if not skillModule then
 		return
 	end
+	event.register("Ashfall:ActivateBushcrafting:Registered",
+	               registerBushcraftingRecipe)
 	event.register("equip", useBandage)
 	event.register("damaged", removeBandageHealing)
 	event.register("damagedHandToHand", removeBandageHealing)
 	log:info("initialized")
 end
-event.register("initialized", initialized)
+event.register(tes3.event.initialized, initializedCallback,
+               { priority = 100 }) -- before crafting framework
 
 local function registerModConfig()
 	local template = mwse.mcm.createTemplate("Craftable Bandage")
