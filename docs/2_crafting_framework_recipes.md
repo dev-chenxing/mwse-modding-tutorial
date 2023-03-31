@@ -111,7 +111,7 @@ To do that, we register the `loaded` event. Same as before, go to the `loaded` e
 
 To give item to the player, we use the `addItem()` function in `tes3` API. We want to give the player 5 fabric, so we pass the reference of the player, that is tes3.player, to the reference parameter. 
 
-```Lua
+```Lua hl_lines="3-7"
 --- @param e loadedEventData
 local function testOnly(e)
 tes3.addItem({
@@ -123,7 +123,7 @@ tes3.addItem({
 
 The script of leveling up skill module skill is a bit complicated. If you want to level up a skill module skill. you pass the skill id to the `getSkill()` function and the increase value to the `levelUpSkill()` function.
 
-```Lua
+```Lua hl_lines="1"
 skillModule.getSkill("Bushcrafting"):levelUpSkill(10)
 end
 ```

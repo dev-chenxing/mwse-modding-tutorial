@@ -1,0 +1,45 @@
+site_name: MWSE Modding Tutorial
+theme:
+  name: material
+  logo: assets/mwse-tutorial-logo.png
+  favicon: assets/mwse-tutorial-logo.png
+  features: 
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+      primary: amber
+      accent: indigo
+    - scheme: slate
+      toggle: 
+        icon: material/weather-sunny
+        name: Switch to light mode
+      primary: indigo
+      accent: amber
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+ - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/youtube
+      link: https://youtube.com/
+    - icon: fontawesome/brands/github
+      link: https://github.com/JoanyMcKarelyn
+
