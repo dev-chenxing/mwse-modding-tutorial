@@ -8,9 +8,9 @@ The mod requires OAAB_Data, The Crafting Framework, Skill Module, and Ashfall. S
 
 ## Introduction
 
-First, you open up [Visual Studio Code](https://code.visualstudio.com/). If you don't have it installed, you do need to go and download it. 
+First, open up [Visual Studio Code](https://code.visualstudio.com/). If you don't have it installed, you do need to go and download it. 
 
-Once you have your VSCode open, click Open Folder, navigate to your Morrowind root foler\Data Files\MWSE. Select Folder. It will ask you Do you trust the authors of the files in this folder? Click Yes, I trust the authors. If you don't already have the Lua and vscode-lua-format extension installed, you'll see popups asking you to install then at the bottom left corner of the screen. Install both of them. 
+Once you have your VSCode open, click Open Folder, navigate to your Morrowind root foler\Data Files\MWSE. Select Folder. It will ask you Do you trust the authors of the files in this folder? Click Yes, I trust the authors. If you don't already have the Lua and vscode-lua-format extension installed, you'll see popups asking you to install them at the bottom left corner of the screen. Install both of them. 
 
 Next, we'll save this as workspace. Click File -> Save Workspace As... Yes we're gonna save it inside the MWSE folder. Save. 
 
