@@ -39,6 +39,7 @@ local config = require("MyMod.config")
 local function onModConfigReady()
     local template = mwse.mcm.createTemplate({ name = "My Mod" })
     template:saveOnClose("My Mod", config)
+    template:register()
 
     local settings = template:createSideBarPage({ label = "Settings" })
     settings.sidebar:createInfo({
@@ -57,7 +58,6 @@ local function onModConfigReady()
             table = config,
         })
     })
-    template:register()
 end
 
 event.register(tes3.event.modConfigReady, onModConfigReady)
@@ -152,7 +152,7 @@ local log = logging.new({
             log:setLogLevel(self.variable.value)
         end,
     })
-    template:register()
+end
 ```
 
 To test the MCM, let's change the "Registered bandage recipe" log to be a debug log. So now when we load the game, we should not be able to see this but if we change the log level to DEBUG, after a restart we should be able to see it.
@@ -163,9 +163,9 @@ log:debug("Registered bandage recipe")
 
 Let's launch the game. So you can see our mod config menu is registered successfully. We have the enable mod button and the log level setting dropdown.
 
-But that's it for today. I encounrage you to play around with these settings and have a better understanding of how the mod gets disabled or enabled by pressing button, and how the log level gets changed. 
+But that's it for today. I encounrage you to play around with these settings and have a better understanding of how the mod gets disabled or enabled by pressing this button, and how the log level gets changed. 
 
-You have learnt what's an if statement, how to concatenate strings, and most importantly, how to add a mod config menu for your MWSE mod. Thanks for watching. I'll see you in the next video. 
+Today, you have learnt what's an if statement, how to concatenate strings, and most importantly, how to add a mod config menu for your MWSE mod. Thanks for watching. I'll see you in the next video. 
 
 ??? example "What your main.lua should look like"
     
@@ -249,12 +249,15 @@ You have learnt what's an if statement, how to concatenate strings, and most imp
         local template = mwse.mcm.createTemplate(
                         { name = "Craftable Bandage" })
         template:saveOnClose("Craftable Bandage", config)
+        template:register()
 
         local settings = template:createSideBarPage({ label = "Settings" })
         settings.sidebar:createInfo({
-            -- This text will be on the right-hand side block
-            text = "Craftable Bandage\n\nCreated by Amalie.\n\nThis mod allows you to craft OAAB bandages with novice bushcrafting skill. It serves as an alternative to alchemy and restoration",
-        })
+		    -- This text will be on the right-hand side block
+		    text = "Craftable Bandage\n\nCreated by Amalie.\n\n" ..
+		    "This mod allows you to craft OAAB bandages with novice bushcrafting skill." ..
+		    "It serves as an alternative to alchemy and restoration",
+	    })
 
         settings:createOnOffButton({
             label = "Enable Mod",
@@ -278,7 +281,6 @@ You have learnt what's an if statement, how to concatenate strings, and most imp
                 log:setLogLevel(self.variable.value)
             end,
         })
-        template:register()
     end
 
     event.register(tes3.event.modConfigReady, onModConfigReady)

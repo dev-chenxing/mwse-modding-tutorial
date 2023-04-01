@@ -5,8 +5,8 @@ repo_name: amaliegay/mwse-modding-tutorial
 
 theme:
   name: material
-  logo: assets/mwse-tutorial-logo.png
-  favicon: assets/mwse-tutorial-logo.png
+  logo: assets/1200px-Lua-logo-nolabel-tutorial.png
+  favicon: assets/1200px-Lua-logo-nolabel-tutorial.png
   features: 
     - navigation.sections
     - navigation.top
