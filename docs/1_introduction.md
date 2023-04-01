@@ -82,7 +82,7 @@ registerBushcraftingRecipe()
 Right now, when the function is called, it's not doing anything. So let's print some information to MWSE.log. 
 
 ```lua
-mwse.log("[Craftable Bandage] registering bushcrafting recipe...")
+mwse.log("[Craftable Bandage] Registering bushcrafting recipe...")
 ```
 
 This is one of the common ways to write information to MWSE.log and we will look at another way to do logging later. Let's run Morrowind.exe and check the log. You can see [Craftable Bandage] registering bushcrafting recipe... here. 
@@ -105,7 +105,7 @@ event.register(tes3.event.initialized, initializedCallback)
 Here, `tes3.event.initialized` is the event name and `initializedCallback` is the function to be called when the `initialized` event is fired. Same as before I will write some information to print out to MWSE.log.
 
 ```lua
-mwse.log("[Craftable Bandage] initialized")
+mwse.log("[Craftable Bandage] Initialized")
 ```
 
 Usually, you want to register your mod's events here. And in our case, we need to register the "Ashfall:ActivateBushcrafting:Registered" event. 
@@ -128,4 +128,32 @@ Let's test it again. Now as you can see our bandage recipe is registered right w
 
 That's it for today. You learnt how to comment, create variables and functions, call functions, and the concept of event-driven programming. See you in the next video. 
 
-Next - [Episode 2: Libraries, Logging, Crafting Framework Recipes]()
+??? example "What your main.lua should look like"
+    
+    ```lua
+    --[[
+        Mod: Craftable Bandage
+        Author: Amalie
+        
+        This mod allows you to craft OAAB bandages with novice bushcrafting skill.
+        It serves as an alternative to alchemy and restoration.
+    ]] --
+
+    local bandageId1 = "AB_alc_Healbandage01"
+    local bandageId2 = "AB_alc_Healbandage02"
+
+    local function registerBushcraftingRecipe()
+        mwse.log("[Craftable Bandage] Registering bandage recipe...")
+    end
+
+    --- @param e initializedEventData
+    local function initializedCallback(e)
+        event.register("Ashfall:ActivateBushcrafting:Registered",
+                    registerBushcraftingRecipe)
+        mwse.log("[Craftable Bandage] Initialized")
+    end
+    event.register(tes3.event.initialized, initializedCallback,
+                { priority = 100 }) -- before crafting framework
+    ```
+
+Next - [Episode 2: Libraries, Logging, Crafting Framework Recipes](https://amaliegay.github.io/mwse-modding-tutorial/2_crafting_framework_recipes/)

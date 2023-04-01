@@ -109,12 +109,16 @@ Before we launch the game and test the script. I suggest you write a script so w
 
 To do that, we register the `loaded` event. Same as before, go to the `loaded` event page and copy paste the code to main.lua. But we will rename the function to `testOnly` and move the `event.register` line inside our `initializedCallback` function.
 
+```Lua
+event.register(tes3.event.loaded, testOnly)
+```
+
 To give item to the player, we use the `addItem()` function in `tes3` API. We want to give the player 5 fabric, so we pass the reference of the player, that is tes3.player, to the reference parameter. 
 
 ```Lua hl_lines="3-7"
 --- @param e loadedEventData
 local function testOnly(e)
-tes3.addItem({
+	tes3.addItem({
 		reference = tes3.player,
 		item = "ashfall_fabric",
 		count = 5,
@@ -124,7 +128,7 @@ tes3.addItem({
 The script of leveling up skill module skill is a bit complicated. If you want to level up a skill module skill. you pass the skill id to the `getSkill()` function and the increase value to the `levelUpSkill()` function.
 
 ```Lua hl_lines="1"
-skillModule.getSkill("Bushcrafting"):levelUpSkill(10)
+	skillModule.getSkill("Bushcrafting"):levelUpSkill(10)
 end
 ```
 
@@ -132,4 +136,68 @@ Now we can finally test the script. As you can see, our character has 5 fabric i
 
 That's it for today! You've officially made your first MWSE mod! But both the tutorial and the mod are not finished jusy yet. There is still a lot to learn and some features to add. Stay tune for the next video. Bye!
 
-Next - [Episode 3: ]()
+??? example "What your main.lua should look like"
+    
+    ```lua
+	--[[
+		Mod: Craftable Bandage
+		Author: Amalie
+		
+		This mod allows you to craft OAAB bandages with novice bushcrafting skill.
+		It serves as an alternative to alchemy and restoration.
+	]] --
+
+	local ashfall = include("mer.ashfall.interop")
+	local CraftingFramework = include("CraftingFramework")
+	local skillModule = include("OtherSkills.skillModule")
+	local logging = require("logging.logger")
+
+	---@type mwseLogger
+	local log = logging.new({
+		name = "Craftable Bandage",
+		logLevel = "INFO",
+	})
+
+	local bandageId1 = "AB_alc_Healbandage01"
+	local bandageId2 = "AB_alc_Healbandage02"
+
+	--- @param e CraftingFramework.MenuActivator.RegisteredEvent
+	local function registerBushcraftingRecipe(e)
+		local bushcraftingActivator = e.menuActivator
+		--- @type CraftingFramework.Recipe.data
+		local recipe = {
+			id = bandageId2,
+			craftableId = bandageId2,
+			description = "Simple cloth bandages for the dressing of wounds.",
+			materials = { { material = "fabric", count = 1 } },
+			skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },
+			soundType = "fabric",
+			category = "Other",
+		}
+		local recipes = { recipe }
+		bushcraftingActivator:registerRecipes(recipes)
+		log:info("Registered bandage recipe")
+	end
+
+	--- @param e loadedEventData
+	local function testOnly(e)
+		tes3.addItem({
+			reference = tes3.player,
+			item = "ashfall_fabric",
+			count = 5,
+		})
+		skillModule.getSkill("Bushcrafting"):levelUpSkill(10)
+	end
+
+	--- @param e initializedEventData
+	local function initializedCallback(e)
+		event.register(tes3.event.loaded, testOnly)
+		event.register("Ashfall:ActivateBushcrafting:Registered",
+					registerBushcraftingRecipe)
+		log:info("Initialized")
+	end
+	event.register(tes3.event.initialized, initializedCallback,
+				{ priority = 100 }) -- before crafting framework
+    ```
+
+Next - [Episode 3: Mod Config Menu, If Statements, Concatenating Strings](https://amaliegay.github.io/mwse-modding-tutorial/3_mcm/)

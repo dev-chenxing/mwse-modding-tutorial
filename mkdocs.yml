@@ -1,4 +1,8 @@
 site_name: MWSE Modding Tutorial
+
+repo_url: https://github.com/amaliegay/mwse-modding-tutorial/
+repo_name: amaliegay/mwse-modding-tutorial
+
 theme:
   name: material
   logo: assets/mwse-tutorial-logo.png
@@ -41,5 +45,5 @@ extra:
     - icon: fontawesome/brands/youtube
       link: https://youtube.com/
     - icon: fontawesome/brands/github
-      link: https://github.com/JoanyMcKarelyn
+      link: https://github.com/amaliegay
 
