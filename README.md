@@ -4,7 +4,7 @@ In this tutorial series, you will learn the basics of [MWSE-Lua](https://mwse.gi
 
 This mod will allow you to use your character's bushcrafting skill to craft bandages from OAAB_Data and the effect will vary depending on your character's survival skill. 
 
-The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [Skill Module](https://www.nexusmods.com/morrowind/mods/46034), [The Crafting Framework](https://www.nexusmods.com/morrowind/mods/51009), and [Ashfall](https://www.nexusmods.com/morrowind/mods/49057). So install them if you haven't already.
+The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [Skills Module](https://www.nexusmods.com/morrowind/mods/46034), [The Crafting Framework](https://www.nexusmods.com/morrowind/mods/51009), and [Ashfall](https://www.nexusmods.com/morrowind/mods/49057). So install them if you haven't already.
 
 ## Credits
 
@@ -13,6 +13,7 @@ The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [S
 - [Danae](https://www.nexusmods.com/morrowind/users/1233897), for the original idea of Craftable Bandage
 - [Greatness7](https://github.com/Greatness7), for the OAAB MWSE scripts
 - [Hrnchamd](https://github.com/Hrnchamd), for the Mkdocs help
+- [Jean-Baptiste Morizot](http://cargocollective.com/jbmorizot/), for BluuNext font
 - [Merlord](https://github.com/jhaakma), for Ashfall, Crafting Framework, Skills Module, and coding help
 - [NullCascade](https://github.com/NullCascade), for the Mkdocs help
 - [OAAB_Data Team](https://github.com/Of-Ash-And-Blight/OAAB-Data), for the development of OAAB

@@ -20,29 +20,24 @@ local log = logging.new({
 	logLevel = config.logLevel,
 })
 
-local bandageId1 = "AB_alc_HealBandage01"
-local bandageId2 = "AB_alc_HealBandage02"
-local isBandage = { [bandageId1] = true, [bandageId2] = true }
+local bandageId = "AB_alc_Healbandage02"
 
----@param e CraftingFramework.MenuActivator.RegisteredEvent
+--- @param e CraftingFramework.MenuActivator.RegisteredEvent
 local function registerBushcraftingRecipe(e)
 	local bushcraftingActivator = e.menuActivator
-	if bushcraftingActivator then
-		---@type CraftingFramework.Recipe.data[]
-		local recipes = {
-			{
-				id = bandageId2,
-				craftableId = bandageId2,
-				description = "Simple cloth bandages for the dressing of wounds.",
-				materials = { { material = "fabric", count = 1 } },
-				skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },
-				soundType = "fabric",
-				category = "Bandages",
-			},
-		}
-		bushcraftingActivator:registerRecipes(recipes)
-		log:info("Bandage recipe registered")
-	end
+	--- @type CraftingFramework.Recipe.data
+	local recipe = {
+		id = bandageId,
+		craftableId = bandageId,
+		description = "Simple cloth bandages for the dressing of wounds.",
+		materials = { { material = "fabric", count = 1 } },
+		skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },
+		soundType = "fabric",
+		category = "Other",
+	}
+	local recipes = { recipe }
+	bushcraftingActivator:registerRecipes(recipes)
+	log:debug("Registered bandage recipe")
 end
 
 ---@param ref tes3reference
@@ -59,8 +54,8 @@ local function getEffectDuration(ref)
 end
 
 ---@param e equipEventData
-local function useBandage(e)
-	if isBandage[e.item.id] then
+local function bandageEquipEvent(e)
+	if (e.item.id:find("^AB_alc_HealBandage")) then
 		local duration = getEffectDuration(e.reference)
 		tes3.applyMagicSource({
 			reference = e.reference,
@@ -115,19 +110,28 @@ local function initializedCallback(e)
 	end
 	event.register("Ashfall:ActivateBushcrafting:Registered",
 	               registerBushcraftingRecipe)
-	event.register("equip", useBandage)
+	event.register("OAAB:equip", bandageEquipEvent)
 	event.register("damaged", removeBandageHealing)
 	event.register("damagedHandToHand", removeBandageHealing)
-	log:info("initialized")
+	log:info("Initialized")
 end
-event.register(tes3.event.initialized, initializedCallback,
-               { priority = 100 }) -- before crafting framework
+event.register(tes3.event.initialized, initializedCallback) -- before crafting framework
 
-local function registerModConfig()
-	local template = mwse.mcm.createTemplate("Craftable Bandage")
-	template:saveOnClose(configPath, config)
-	local page = template:createSideBarPage({})
-	page:createOnOffButton({
+local function onModConfigReady()
+	local template = mwse.mcm.createTemplate(
+	                 { name = "Craftable Bandage" })
+	template:saveOnClose("Craftable Bandage", config)
+	template:register()
+
+	local settings = template:createSideBarPage({ label = "Settings" })
+	settings.sidebar:createInfo({
+		-- This text will be on the right-hand side block
+		text = "Craftable Bandage\n\nCreated by Amalie.\n\n" ..
+		"This mod allows you to craft OAAB bandages with novice bushcrafting skill." ..
+		"It serves as an alternative to alchemy and restoration",
+	})
+
+	settings:createOnOffButton({
 		label = "Enable Mod",
 		variable = mwse.mcm.createTableVariable({
 			id = "enabled",
@@ -135,7 +139,7 @@ local function registerModConfig()
 			restartRequired = true,
 		}),
 	})
-	page:createDropdown({
+	settings:createDropdown({
 		label = "Log Level",
 		options = {
 			{ label = "DEBUG", value = "DEBUG" },
@@ -149,9 +153,6 @@ local function registerModConfig()
 			log:setLogLevel(self.variable.value)
 		end,
 	})
-	page.sidebar:createInfo({
-		text = "Cratable Bandage allows you to craft OAAB Bandage with Ashfall Bushcrafting.",
-	})
-	template:register()
 end
-event.register("modConfigReady", registerModConfig)
+
+event.register(tes3.event.modConfigReady, onModConfigReady)
