@@ -85,8 +85,9 @@ end
 
 ---@param e damagedEventData|damagedHandToHandEventData
 local function removeBandageHealing(e)
-	for _, activeMagicEffect in ipairs(
-	                            e.reference.mobile.activeMagicEffectList) do
+	local activeMagicEffectList = e.reference.mobile
+	                              .activeMagicEffectList
+	for _, activeMagicEffect in ipairs(activeMagicEffectList) do
 		if activeMagicEffect.instance.source.name == "Bandage" then
 			activeMagicEffect.effectInstance.timeActive =
 			activeMagicEffect.duration
