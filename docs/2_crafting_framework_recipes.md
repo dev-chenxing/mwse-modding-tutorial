@@ -4,7 +4,7 @@ Welcome back, today we're gonna learn about libraries, logging, function argumen
 
 ## Libraries (or Modules)
 
-Remember that our mod relies on Skills Module, The Crafting Framework, and Ashfall? Let me show you how to import them into your script, so you get access to their functions. Imported libraries are usually put at the top of the script.
+Our mod relies on Skills Module, The Crafting Framework, and Ashfall. They need to be imported into our script so it has access to their functions. Imports are typically placed at the top of the script.
 
 ```lua
 local ashfall = include("mer.ashfall.interop")
@@ -13,11 +13,11 @@ local skillModule = include("OtherSkills.skillModule")
 local logging = require("logging.logger")
 ```
 
-`include` and `require` are the two ways to import libraries to your script. The difference is that `include` doesn't require you to have the mod installed, but `require` does.
+`include` and `require` are the two ways to import libraries to your script. The difference between the two is that `include` doesn't require you to have the mod installed, but `require` does.
 
 ## Logging
 
-Besides the three mods, I've also imported the logging library. In the last episode, I mentioned another way to do logging. So let me show you how to create a new logger with the logging library. 
+Besides the three mods, I've also imported the logging library. I mentioned before another way to do logging. So let me show you how to create a new logger with the logging library. 
 
 ```Lua
 ---@type mwseLogger
@@ -31,9 +31,9 @@ Now we can replace all occurrences of `mwse.log` with `log:info`. To replace phr
 
 ## Function Arguments
 
-Now let's look back at the `initalizedCallback` function that we copied and pasted from the MWSE doc. You'll notice there is this `e` inside the parentheses. This is a function argument, specifically event data.
+Now let's look back at the `initalizedCallback` function that we copied from the MWSE doc. You'll notice there is this `e` inside the parentheses. This is a function argument, specifically event data.
 
-Event data is defined by MWSE and you can look them up in the [doc events pages](https://mwse.github.io/MWSE/events/absorbedMagic/). Here `@param` is a tag to specify the types of the parameters of a function. So parameter `e` here is of type `initializedEventData`.
+Event data is defined by MWSE and you can look them up in the [MWSE doc events page](https://mwse.github.io/MWSE/events/absorbedMagic/). Here `@param` is a tag to specify the types of the parameters of a function. So here, parameter `e` is of type `initializedEventData`.
 
 And we want to specify the parameter for function `registerBushcraftingRecipe()` as well. But the `Ashfall:ActivateBushcrafting:Registered` event is not added by MWSE. It is added by Crafting Framework and Ashfall.
 
@@ -62,7 +62,7 @@ local recipe2
 local recipes = { recipe1, recipe2 }
 ```
 
-So this is a list of recipes, but we really only need one recipe. It is still a list even though it only has one item. And we can specify its type `CraftingFramework.Recipe.data` using the `@type` tag.
+So this is a list of recipes. For our purposes, we only need one recipe. A list is still a list if it only has one item. Additionally, we can specify its type `CraftingFramework.Recipe.data` using the `@type` tag.
 
 ```Lua
 --- @type CraftingFramework.Recipe.data
@@ -72,9 +72,9 @@ local recipes = { recipe }
 
 ## Crafting Framework Recipe
 
-Now if you hover over `recipe`, you can see a recipe can hold tons of information.
+If you hover over `recipe`, you can see a recipe can hold a lot of information.
 
-But this is a simple mod. We will only need to specify a few things:
+Since we're making a simple mod, we only need to specify:
 
 `id`: the recipe identifier; 
 
@@ -86,7 +86,7 @@ But this is a simple mod. We will only need to specify a few things:
 
 Next, `skillRequirements`, a list of skill requirement data. So if we want the character to have at least novice level of bushcrafting to be able to craft a bandage, we can do this `skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },`
 
-`soundType`, you can specify `soundType`, `soundId`, `soundPath`, or nothing (to use the default sound). A list of `soundType`s can be found in the table `constructionSounds` in `CraftingFramework\components\Craftables.lua`. We're gonna use the "fabric" `soundType` here.
+`soundType`, you can specify `soundType`, `soundId`, `soundPath`, or nothing (to use the default sound). A list of `soundType`s can be found in the table `constructionSounds` in `CraftingFramework\components\Craftables.lua`. We will use the "fabric" `soundType`.
 
 `category` can be anything you like but we're going to use one of the Ashfall categories `"Other"`. A list of Ashfall categories can be found in the table `this.categories` in `mer\ashfall\bushcrafting\config.lua`.
 
@@ -111,7 +111,7 @@ log:info("Registered bandage recipe")
 
 ## Testing
 
-Before we launch the game, if you don't have NullCascade's [UI Expansion](https://www.nexusmods.com/morrowind/mods/46071) installed, I highly recommend you install it, as we will use it for our testing.
+Before we launch the game and test the script, if you don't have NullCascade's [UI Expansion](https://www.nexusmods.com/morrowind/mods/46071) installed, I highly recommend you install it, as we will use it for our testing.
 
 Once you load into a save, open the console menu by hitting back quote or tilde `~` key. We want to give the player 5 fabric and level up to bushcrafting 20 to they meet the requirement to craft a bandage. 
 
@@ -124,7 +124,7 @@ include("OtherSkills.skillModule").getSkill("Bushcrafting"):levelUpSkill(10)
 
 Let's activate the fabric to open the crafting menu. You can see the Craftable Bandage is right here. **Craft**! You have successfully crafted a Bandage!
 
-That's it for today! You've officially made your first MWSE mod! But both the tutorial and the mod are not finished yet. There's still a lot to learn and some features to add. So stay tune for the next video. Bye!
+That's it for today! You've officially made your first MWSE mod! But both the tutorial and the mod are not yet finished. There is still a lot to learn and some features to add. So stay tune for the next video. Bye!
 
 ??? example "What your main.lua should look like"
     

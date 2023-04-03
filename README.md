@@ -17,6 +17,7 @@ The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [S
 - [Merlord](https://github.com/jhaakma), for Ashfall, Crafting Framework, Skills Module, and coding help
 - [NullCascade](https://github.com/NullCascade), for the Mkdocs help
 - [OAAB_Data Team](https://github.com/Of-Ash-And-Blight/OAAB-Data), for the development of OAAB
+- [Pharis](https://github.com/PharisMods), for proofreading
 - [R-Zero](https://github.com/Reizeron), for the MWSE-Lua logo
 
 Next - [Episode 1: Introduction, Variables, Functions, Event-Based Programming](https://amaliegay.github.io/mwse-modding-tutorial/1_introduction/)
