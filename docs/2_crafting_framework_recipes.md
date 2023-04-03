@@ -37,7 +37,7 @@ Event data is defined by MWSE and you can look them up in the MWSE doc events pa
 
 And we want to specify the parameter for function `registerBushcraftingRecipe` as well. But the `Ashfall:ActivateBushcrafting:Registered` event is not added by MWSE. It is added by Crafting Framework and Ashfall.
 
-The documentation for them is great, yet the best place to ask questions about CF will be over at the #crafting-framework channel in the [Morrowind Modding Community discord server](https://discord.me/mwmods).
+The documentation for them isn't great yet. The best place to ask questions about CF will be over at the #crafting-framework channel in the [Morrowind Modding Community discord server](https://discord.me/mwmods). 
 
 You can also just search the script for them. You can find the event data type here `CraftingFramework\components\MenuActivator.lua`. And it has a menuActivator field. Copy it over to our script.
 
