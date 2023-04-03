@@ -4,13 +4,13 @@ Welcome back, today we're gonna learn about if statements, concatenating strings
 
 ## If Statements
 
-An if statement will first check a condition and if the condition is true then all the lines of code under the if statement and before `else/elseif/end` will execute. 
+An if statement will first check a condition and if the condition is true then all the lines of code under the if statement and before `else/elseif/end` will execute.
 
 A quick example, we can create an if statement here in the `initializedCallback` to check if we have Ashfall, Crafting Framework, and Skills Module installed. And if not, tell the script to stop running. 
 
-Remember in the last episode, we imported these mods to our script using the include function. So when the module is not found, it returns nil. It means if we don't have ashfall installed, the ashfall variable will be nil.
+Remember in the last episode, we imported these mods to our script using the include function. So when the module is not found, it returns nil. This means if we don't have Ashfall installed, the `ashfall` variable will be nil.
 
-Since `not nil` equals `true`, the script will return and stop running. This also called a nil check. 
+Since `not nil` equals `true`, the script will return and stop running. This is also called a nil check.
 
 ```Lua hl_lines="2-10"
 local function initializedCallback(e)
@@ -29,9 +29,9 @@ local function initializedCallback(e)
 
 ## Mod Config Menu
 
-Another condition that we should check for is whether the mod is enabled or not. The common way to disable a MWSE mod is through the Mod Config Menu. But we need to add one for our mod first. 
+Another condition that we should check for is whether the mod is enabled or not. The common way to disable a MWSE mod is through the Mod Config Menu. But we need to add one for our mod first.
 
-To do that, register the `"modConfigReady"` event outside of `initializedCallback`. So we go to the doc page for `"modConfigReady"` event and copy this template code to our main.lua. 
+To do that, register the `"modConfigReady"` event outside of `initializedCallback`. We can go to the doc page for `"modConfigReady"` event and copy this template code to our main.lua.
 
 ```Lua
 local config = require("MyMod.config")
@@ -63,11 +63,11 @@ end
 event.register(tes3.event.modConfigReady, onModConfigReady)
 ```
 
-We need to change a few things here since this right now is a mod configuration for a mod call "My Mod". 
+We need to change a few things here since right now this is a mod configuration menu for a mod called "My Mod".
 
-First line here is loading another file `config.lua` in the `\MyMod` folder. This is a common way to load your config but since this is a relatively small mod, we can just load the config in `main.lua`.
+First line here is loading another file, `config.lua`, in the `\MyMod` folder. This is a common way to load your config but since this is a relatively small mod, we can just load the config in `main.lua`.
 
-First, move the config variable as high as we can. And we will change `local config = require("MyMod.config")` to this: 
+First, move the config variable as high as we can. And we will change `local config = require("MyMod.config")` to this:
 
 ```Lua
 local configPath = "Craftable Bandage"
@@ -75,7 +75,7 @@ local defaultConfig = { enabled = true, logLevel = "INFO" }
 local config = mwse.loadConfig(configPath, defaultConfig)
 ```
 
-What this does is when the script gets config from this variable, MWSE will try to load a json file in the `\config` folder with this `configPath` name. If the file doesn't exist, it loads this `defaultConfig` table instead.
+What this does is when the script gets config from this variable, MWSE will try to load a json file in the `\config` folder with this `configPath` name. If the file doesn't exist, it loads `defaultConfig` table instead.
 
 So let's use this enabled config in our `initializedCallback` so it checks if the mod is enabled or not.
 
@@ -87,9 +87,9 @@ local function initializedCallback(e)
 	if not ashfall then
 ```
 
-Right now, the mod is always enabled because we don't have a way to disable it yet. So back to the MCM, replace all the `"My Mod"` to `"Craftable Bandage"`. 
+Right now, the mod is always enabled because we don't have a way to disable it yet. So back to the MCM, replace all occurrences of "`"My Mod"`" with "`"Craftable Bandage""`. 
 
-So I'll explain the template code a bit here. `createTemplate()` paired with `template:register()` how you add a page in the Mod Config Menu. 
+So I'll explain the template code a bit here. `createTemplate()` paired with `template:register()` how you add a page in the Mod Config Menu.
 
 `saveOnClose()` is how your config gets changed in the MCM. The first argument here is the configPath, the json file name that I mentioned before, and the second argument takes the config table.
 
@@ -102,17 +102,17 @@ So let's copy over our mod description here.
 ```Lua
 settings.sidebar:createInfo({
 		-- This text will be on the right-hand side block
-		text = "Craftable Bandage\n\nCreated by Amalie.\n\n" .. 
-        "This mod allows you to craft OAAB bandages with novice bushcrafting skill." .. 
+		text = "Craftable Bandage\n\nCreated by Amalie.\n\n" ..
+        "This mod allows you to craft OAAB bandages with novice bushcrafting skill." ..
         "It serves as an alternative to alchemy and restoration",
 	})
 ```
 
-You can see the description gets quite long there. Let's quickly mention how to concatenating strings in lua. If you split this string into two, we can use the doule dot `..` to concatenate them together. And here `\n` means a new line.
+You can see the description gets quite long there. Let quickly mention how to concatenate strings in Lua. If you split this string into two, we can use the double dot `..` to concatenate them together. And here `\n` means a new line.
 
 ## Mod Config Menu (Continued)
 
-Back to MCM, `createOnOffButton` is the most used function and it's also how we create an enable/disable button for our mod. Let's change the `label` to "Enable Mod". 
+Back to MCM, `createOnOffButton` is the most used function and it's also how we create an enable/disable button for our mod. Let's change the `label` to "Enable Mod".
 
 `description` is the text you'll see on the right column when the mouse hover over the label and button. If your config option needs some explanation, this is how you add it. But an enable/disable button is pretty straight-forward, so I don't feel the need to specify that.
 
@@ -131,7 +131,7 @@ settings:createOnOffButton({
 })
 ```
 
-While you're at it, let's add a dropdown element to set the log level of our logger through MCM. Remember to also change the `logLevel` to `config.logLevel` when we create the logger using `logging.new()`.
+While you're at it, let's add a dropdown element to set the log level of our logger through the MCM. Remember to also change the `logLevel` to `config.logLevel` when we create the logger using `logging.new()`.
 
 ```Lua hl_lines="3 7-20"
 local log = logging.new({
@@ -165,9 +165,9 @@ log:debug("Registered bandage recipe")
 
 Let's launch the game. So you can see if our mod config menu is registered successfully. We have the enable mod button and the log level setting dropdown.
 
-That's it for today. I encounrage you to play around with these settings and have a better understanding of how the mod gets disabled and enabled by pressing the button, and how the log level gets changed. 
+That's it for today. I encourage you to play around with these settings to have a better understanding of how the mod gets disabled and enabled by pressing the button, and how the log level gets changed.
 
-Today, you have learnt what's an if statement, how to concatenate strings, and most importantly, how to add a mod config menu for your MWSE mod. Thanks for watching. I'll see you in the next video. 
+Today, you've learned what an if statement is, how to concatenate strings, and most importantly how to add a mod config menu to your MWSE mod. Thanks for watching. I'll see you in the next video.
 
 ??? example "What your main.lua should look like"
     
@@ -175,7 +175,7 @@ Today, you have learnt what's an if statement, how to concatenate strings, and m
     --[[
         Mod: Craftable Bandage
         Author: Amalie
-        
+
         This mod allows you to craft OAAB bandages with novice bushcrafting skill.
         It serves as an alternative to alchemy and restoration.
     ]] --
