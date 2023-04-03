@@ -1,10 +1,10 @@
 # Episode 2: Libraries, Logging, Crafting Framework Recipes
 
-Welcome back, today we're gonna learn about libraries, logging, function arguments, lists, Crafting Framework recipe, and we are going to test our script in game. 
+Welcome back, today we're gonna learn about libraries, logging, function arguments, lists, Crafting Framework recipes, and we are going to test our script in game.
 
 ## Libraries
 
-Remember that our mod relies on Skill Module, The Crafting Framework, and Ashfall. So let me show you how to import them to your script, so you get access to their functions. They are usually put at the top at the script.
+Remember that our mod relies on Skill Module, The Crafting Framework, and Ashfall. So let me show you how to import them into your script, so you get access to their functions. They are usually put at the top at the script.
 
 ```lua
 local ashfall = include("mer.ashfall.interop")
@@ -13,7 +13,7 @@ local skillModule = include("OtherSkills.skillModule")
 local logging = require("logging.logger")
 ```
 
-`include` and `require` are the two ways to import libraries to your script. The difference is that `include` doesn't require you to have the mod installed, but `require` requires. 
+`include` and `require` are the two ways to import libraries to your script. The difference is that `include` doesn't require you to have the mod installed, but `require` does.
 
 ## Logging
 
@@ -27,19 +27,19 @@ local log = logging.new({
 })
 ```
 
-Now we can replace all the `mwse.log` to `log:info`. To replace phrases in VSCode, highlight the phrase and press `Ctrl + H`, enter `log:info` and Replace All.
+Now we can replace all occurrences of `mwse.log` with `log:info`. To replace phrases in VSCode, highlight the phrase and press `Ctrl + H`, enter `log:info` and click Replace All.
 
 ## Function Arguments
 
-Now let's look back at the `initalizedCallback` function that we copied and pasted from the MWSE doc. You'll notice there is this `e` inside the parenthese. This is a function argument, specifically event data.
+Now let's look back at the `initalizedCallback` function that we copied and pasted from the MWSE doc. You'll notice there is this `e` inside the parentheses. This is a function argument, specifically event data.
 
 Event data is defined by MWSE and you can look them up in the MWSE doc events page. Here `@param` is a tag to specify the types of the parameters of a function. So parameter `e` here is of type `initializedEventData`.
 
-And we want to specify the parameter for function `registerBushcraftingRecipe` as well. But the `Ashfall:ActivateBushcrafting:Registered` event is not added by MWSE. It is added by Crafting Framework and Ashfall. 
+And we want to specify the parameter for function `registerBushcraftingRecipe` as well. But the `Ashfall:ActivateBushcrafting:Registered` event is not added by MWSE. It is added by Crafting Framework and Ashfall.
 
-The documentation for them is great yet. The best place to ask questions about CF will be over at the #crafting-framework channel in [Morrowind Modding Community discord server](https://discord.me/mwmods). 
+The documentation for them is great, yet the best place to ask questions about CF will be over at the #crafting-framework channel in the [Morrowind Modding Community discord server](https://discord.me/mwmods).
 
-You can also just search the script for them. You can find the event data type here `CraftingFramework\components\MenuActivator.lua`. And it has a menuActivator field. Copy it over to our script. 
+You can also just search the script for them. You can find the event data type here `CraftingFramework\components\MenuActivator.lua`. And it has a menuActivator field. Copy it over to our script.
 
 ```Lua
 --- @param e CraftingFramework.MenuActivator.RegisteredEvent
@@ -54,7 +54,7 @@ local bushcraftingActivator = e.menuActivator
 
 ## List
 
-Next, I am going to create a list of recipes to register. A list is used to store multiple items in a single variable. Lists are enclosed in curly braces and each item is separated by a comma. 
+Next, I am going to create a list of recipes to register. A list is used to store multiple items in a single variable. Lists are enclosed in curly braces and each item is separated by a comma.
 
 ```
 local recipe1
@@ -62,7 +62,7 @@ local recipe2
 local recipes = { recipe1, recipe2 }
 ```
 
-So this is a list of recipe. But we really only need one. It is still a list but only has one item. And we can specify its type `CraftingFramework.Recipe.data` using the `@type` tag. 
+So this is a list of recipes, but we really only need one. It is still a list even though it only has one item. And we can specify its type `CraftingFramework.Recipe.data` using the `@type` tag.
 
 ```Lua
 --- @type CraftingFramework.Recipe.data
@@ -72,17 +72,17 @@ local recipes = { recipe }
 
 ## Crafting Framework Recipe
 
-Now if you hover over `recipe`, you can see a recipe can hold tons of information. 
+Now if you hover over `recipe`, you can see a recipe can hold tons of information.
 
-But this is a simple mod. We only need to specify: id, the recipe identifier; craftableId, the id of the bandage; description; materials, what you need to craft this bandage. You need to give a list of material requirement here. 
+But this is a simple mod. We only need to specify: id, the recipe identifier; craftableId, the id of the bandage; description; materials, what you need to craft this bandage. You need to give a list of material requirements here.
 
-You can enter ashfall material id or any object id. A list of ashfall material can be found in table `this.materials` in `mer\ashfall\bushcrafting\config.lua`. The idea is that if you have one of any kind of fabric, you can craft a bandage.
+You can enter Ashfall material id or any object id. A list of Ashfall materials can be found in the table `this.materials` in `mer\ashfall\bushcrafting\config.lua`. The idea is that if you have one of any kind of fabric, you can craft a bandage.
 
-Next, skillRequirements, a list of skill requirement data. So we want the character to have at least novice level of bushcrafting to be able to craft a bandage. We imported ashfall, now we can access the data from ashfall. `skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },`
+Next, skillRequirements, a list of skill requirement data. So we want the character to have at least novice level of bushcrafting to be able to craft a bandage. We imported Ashfall so now we can access the data. `skillRequirements = { ashfall.bushcrafting.survivalTiers.novice },`
 
-Next, soundType, you can either specify soundType or soundId or soundPath or nothing and use the default sound. A list of soundType can be found in table `constructionSounds` in `CraftingFramework\components\Craftables.lua`. We're gonna use the "fabric" soundType.
+Next, soundType, you can specify soundType, soundId, soundPath, or nothing (to use the default sound). A list of soundTypes can be found in the table `constructionSounds` in `CraftingFramework\components\Craftables.lua`. We're gonna use the "fabric" soundType.
 
-Category can be anything you like but we're going to use one of the Ashfall categories "Other". A list of Ashfall categories can be found in table `this.categories` in `mer\ashfall\bushcrafting\config.lua`.
+Category can be anything you like but we're going to use one of the Ashfall categories "Other". A list of Ashfall categories can be found in the table `this.categories` in `mer\ashfall\bushcrafting\config.lua`.
 
 ```Lua
 local recipe = {
@@ -105,7 +105,7 @@ log:info("Registered bandage recipe")
 
 ## Testing
 
-Before we launch the game and test the script. I suggest you write a script so when you load your save, your character will have 5 fabric in their inventory and is level 20 in bushcrafting. 
+Before we launch the game and test the script. I suggest you write a script so when you load your save, your character will have 5 fabric in their inventory and is level 20 in bushcrafting.
 
 To do that, we register the `loaded` event. Same as before, go to the `loaded` event page and copy paste the code to main.lua. But we will rename the function to `testOnly` and move the `event.register` line inside our `initializedCallback` function.
 
@@ -113,7 +113,7 @@ To do that, we register the `loaded` event. Same as before, go to the `loaded` e
 event.register(tes3.event.loaded, testOnly)
 ```
 
-To give item to the player, we use the `addItem()` function in `tes3` API. We want to give the player 5 fabric, so we pass the reference of the player, that is tes3.player, to the reference parameter. 
+To give items to the player, we use the `addItem()` function in the `tes3` API. We want to give the player 5 fabric, so we pass the reference of the player, that is tes3.player, to the reference parameter.
 
 ```Lua hl_lines="3-7"
 --- @param e loadedEventData
@@ -125,24 +125,24 @@ local function testOnly(e)
 	})
 ```
 
-The script of leveling up skill module skill is a bit complicated. If you want to level up a skill module skill. you pass the skill id to the `getSkill()` function and the increase value to the `levelUpSkill()` function.
+Leveling up a skill module skill is a bit complicated. To level up a skill module skill you pass the skill id to the `getSkill()` function and the increase value to the `levelUpSkill()` function.
 
 ```Lua hl_lines="1"
 	skillModule.getSkill("Bushcrafting"):levelUpSkill(10)
 end
 ```
 
-Now we can finally test the script. As you can see, our character has 5 fabric in their inventory and is level 20 in bushcrafting. Let's activate the fabric. Our Craftable Bandage is right here. Craft! You have successfully craft Bandage!
+Now we can finally test the script. As you can see, our character has 5 fabric in their inventory and is level 20 in bushcrafting. Let's activate the fabric. Our Craftable Bandage is right here. Craft! You have successfully crafted a Bandage!
 
-That's it for today! You've officially made your first MWSE mod! But both the tutorial and the mod are not finished jusy yet. There is still a lot to learn and some features to add. Stay tune for the next video. Bye!
+That's it for today! You've officially made your first MWSE mod! But both the tutorial and the mod are not finished just yet. There is still a lot to learn and some features to add. Stay tuned for the next video. Bye!
 
 ??? example "What your main.lua should look like"
-    
+
     ```lua
 	--[[
 		Mod: Craftable Bandage
 		Author: Amalie
-		
+
 		This mod allows you to craft OAAB bandages with novice bushcrafting skill.
 		It serves as an alternative to alchemy and restoration.
 	]] --
