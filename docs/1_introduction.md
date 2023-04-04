@@ -16,7 +16,7 @@ Now, we are going to create the folder for our MWSE mod. On the left side of the
 
 Right Click on `\mods`, select **New Folder...**. Here, you need to enter your modder name. I am Amalie so I'll type `Amalie` here. Then, right click on the folder you just created, select **New Folder...** again. This time we need to enter the name for the mod that we will be creating, `craftableBandage`.
 
-You can namae it any way you want, I personally like using camelCase, that is, no separator between words, first letter lowercased, and the first letter of all other words capitalized. But you can use snake_case `craftable_bandage` or Normal `Craftable Bandage`. Just remember, don't put a dot in your folder name. For example, `craftable.bandage`.
+You can name it any way you want, I personally like using camelCase, that is, no separator between words, first letter lowercased, and the first letter of all other words capitalized. But you can use snake_case `craftable_bandage` or Normal `Craftable Bandage`. Just remember, don't put a dot in your folder name. For example, `craftable.bandage`.
 
 Now, right click on `\craftableBandage`, select **New File...**, and name it `main.lua`. This is the the main file of your mod and it must be named `main.lua`.
 

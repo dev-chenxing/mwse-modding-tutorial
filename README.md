@@ -19,6 +19,6 @@ The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [S
 - [OAAB_Data Team](https://github.com/Of-Ash-And-Blight/OAAB-Data), for the development of OAAB
 - [Pharis](https://github.com/PharisMods), for proofreading
 - [R-Zero](https://github.com/Reizeron), for the MWSE-Lua logo
-- [Uncle Boss](), for editing and proofreading.
+- [Uncle Boss](https://www.marxists.org/), for editing and proofreading.
 
 Next - [Episode 1: Introduction, Variables, Functions, Event-Based Programming](https://amaliegay.github.io/mwse-modding-tutorial/1_introduction/)

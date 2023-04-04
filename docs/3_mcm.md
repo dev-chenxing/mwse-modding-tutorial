@@ -89,7 +89,7 @@ local function initializedCallback(e)
 
 Right now, the mod is always enabled because we don't have a way to disable it yet. So back to the MCM, replace all occurrences of "`"My Mod"`" with "`"Craftable Bandage""`. 
 
-So I'll explain the template code a bit here. `createTemplate()` paired with `template:register()` how you add a page in the Mod Config Menu.
+I'll explain the template code a bit here. `createTemplate()` paired with `template:register()` is how you add a page in the Mod Config Menu.
 
 `saveOnClose()` is how your config gets changed in the MCM. The first argument here is the configPath, the json file name that I mentioned before, and the second argument takes the config table.
 
@@ -108,7 +108,7 @@ settings.sidebar:createInfo({
 	})
 ```
 
-You can see the description gets quite long there. Let quickly mention how to concatenate strings in Lua. If you split this string into two, we can use the double dot `..` to concatenate them together. And here `\n` means a new line.
+You can see the description gets quite long there. Quick mention of how to concatenate strings in Lua: If you split this string into two, we can use the double dot `..` to concatenate them together. And here `\n` means a new line.
 
 ## Mod Config Menu (Continued)
 
@@ -116,7 +116,7 @@ Back to MCM, `createOnOffButton` is the most used function and it's also how we 
 
 `description` is the text you'll see on the right column when the mouse hover over the label and button. If your config option needs some explanation, this is how you add it. But an enable/disable button is pretty straight-forward, so I don't feel the need to specify that.
 
-`variable` is the variable you want to change by clicking the button. `id` is the variable name. `table` is the table the variable is in. We want to change the config.enabled variable by clicking on this button. So the `id` here should bee `enabled` and table should be `config`. 
+`variable` is the variable you want to change by clicking the button. `id` is the variable name. `table` is the table the variable is in. We want to change the config.enabled variable by clicking on this button. The `id` here should be `enabled` and table should be `config`. 
 
 In our case, we also need to set the `restartRequired` field to `true` so a message box will popup to warn the user. When the game first loads this script, if the mod is enabled, it registers the recipe, so it doesn't matter if we disable it afterwards. 
 
@@ -163,7 +163,7 @@ To test the MCM, you can change the "Registered bandage recipe" log to be a debu
 log:debug("Registered bandage recipe")
 ```
 
-Let's launch the game. So you can see if our mod config menu is registered successfully. We have the enable mod button and the log level setting dropdown.
+Let's launch the game to check if our mod config menu is registered successfully. We have the enable mod button and the log level setting dropdown.
 
 That's it for today. I encourage you to play around with these settings to have a better understanding of how the mod gets disabled and enabled by pressing the button, and how the log level gets changed.
 
@@ -276,4 +276,4 @@ Today, you've learned what an if statement is, how to concatenate strings, and m
     event.register(tes3.event.modConfigReady, onModConfigReady)
     ```
 
-Next - [Episode 4: Adding More Bandages Features](https://amaliegay.github.io/mwse-modding-tutorial/4_adding_bandage_features.md/)
+Next - [Episode 4: Adding More Bandages Features](https://amaliegay.github.io/mwse-modding-tutorial/4_adding_bandage_features/)
