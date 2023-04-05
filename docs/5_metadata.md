@@ -4,7 +4,7 @@ Welcome back! When we last left off, we have finished the mod. All we have to do
 
 ## Metadata File
 
-A metadata file is a file that is primarily used for checking dependencies. Dependency Manager is a MWSE feature added in Feburary 2023. Modders are strongly recommended to add a metadata file for their mods so users would get a warning if any required files are missing. 
+A metadata file is a file that is primarily used for checking dependencies. Dependency Manager is a MWSE feature added in February 2023. Modders are strongly recommended to add a metadata file for their mods so users would get a warning if any required files are missing. 
 
 To add a metadata file for your mod, in your `\Data Files` diretory, create a file with name that ends with `-metadata.toml`. Our mod is called `"Craftable Bandage"`, so I'll name it `Craftable Bandage-metadata.toml`. 
 
