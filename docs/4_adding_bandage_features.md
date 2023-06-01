@@ -1,16 +1,16 @@
 # Section 4: Adding More Bandages Features
 
-Welcome back to another episode of MWSE Modding Tutorial. So our mod is almost complete. First we'll look at some scripts from OAAB_Data and then add some additional features for bandages ourselves.
+Our mod is almost complete. First we'll look at some scripts from OAAB_Data and then add some additional features for bandages ourselves.
 
 ## OAAB_Data Bandages
 
 OAAB_Data actually already comes with a feature for bandages. It plays the bandaging sound instead of the potion drinking sound. We can take a look at how they do it in `\OAAB\MiscPotions\main.lua`.
 
-Studying other people's scripts is a great way for beginners to learn how to mod with MWSE-Lua. By looking at other people's scripts. 
+Studying other people's scripts is a great way for beginners to learn how to mod with MWSE-Lua. 
 
 All the MWSE-Lua code ever published on Nexusmods can be found at [mwse-lua-dump](https://github.com/MWSE/morrowind-nexus-lua-dump). If you don't know how to use certain functions or certain events, you can look it up by search the dump. Very very handy!
 
-Back to OAAB_Data and the `\MiscPotions` script:
+Back to OAAB_Data and the `MiscPotions` script:
 
 ```Lua
 -- Prevent drink sounds
@@ -23,7 +23,7 @@ end
 event.register("equip", stopDrinkSounds, {priority = 1000})
 ```
 
-It registers the `equip` event with very high priority to ensure it runs first. Then it checks if the `item` that's being equipped here has an `id` that starts with `"AB_alc_"`. Here, the caret symbol `^` anchors the pattern at the beginning of the string.
+It registers the `equip` event with very high priority to ensure it runs first. Then it checks if the `item` that's being equipped here has an `id` that starts with `"AB_alc_"`. The caret symbol `^` here anchors the pattern at the beginning of the string.
 
 Then it calls the `addBlockedSound()` function to block the drink sound from playing. Then it triggers an event called `"OAAB:equip"` with `e` as the event data, which is the `equipEventData`. 
 
@@ -45,15 +45,15 @@ It registers the aforementioned `"OAAB:equip"` event instead of `equip`. This is
 
 ## Adding Our Own Features
 
-We're going to write a script that's based on this logic to implement two features that I want to add for bandages.
+We're going to write a script that's based on this logic to implement two features for bandages.
 
 First, we'll get rid of the magical visual effect when using a bandage. 
 
 Second, we'll make the duration of the healing effect vary according to your character's Survival skill. So, if your skill is at level 20, it heals for 20 seconds; and if your skill is at 40, it heals for 40 seconds.
 
-Before we continuem, it's important to mention that you should always give credit to any source you use. Here, we're copying from Greatness7's script, and before we are using Merlord's script. Most MWSE-Lua modders are generally okay about other modders using their scripts but there are exceptions. Ask them if you can. Most MWSE-Lua modders hang out at either [Morrowind Modding Community](https://discord.me/mwmods) or [The Dahrk Realm](https://discord.gg/nPBUdbrXa3). "Be excellent to each other."
+Before we continue, it's important to mention that you should always give credit to any source you use. Here, we're copying from Greatness7's script, and before we are using Merlord's script. Most MWSE-Lua modders are generally okay about other modders using their scripts but there are exceptions. Ask them if you can. Most MWSE-Lua modders hang out at either [Morrowind Modding Community](https://discord.me/mwmods) or [The Dahrk Realm](https://discord.gg/nPBUdbrXa3). "Be excellent to each other."
 
-Let's get back to it. To begin, we will copy this script to our main.lua.
+We will copy the above script to our main.lua.
 
 Instead of `playSound`, we want to block the magical visual effect from playing. We can do that simply by blocking the event and applying the magical effect ourselves.
 
@@ -80,9 +80,9 @@ local function bandageEquipEvent(e)
 end
 ```
 
-We also need to remove the bandage, once the magic effect is applied. Here we need to put `removeItem()` inside `timer.delayOneFrame()`. Otherwise, the game will crash. 
+We also need to remove the bandage, once it is consumed. Here we need to put `removeItem()` inside `timer.delayOneFrame()`. Otherwise, the game will crash. 
 
-The default timer type for `delayOneFrame()` is `simulate` time, a timer that will not advance in menu mode. However, if we want the bandage to be removed immediately after we use it, we need to set it to `timer.real`, a timer advance in real time. 
+The default timer type for `delayOneFrame()` is `simulate` time, a timer that will not advance in menu mode. However, if we want the bandage to be removed immediately after we use it, we need to set it to `timer.real`, a timer that advances at real time. 
 
 ```Lua hl_lines="2-8"
     	})
@@ -108,9 +108,11 @@ Also, it's nice to have a message popup saying "Bandage applied" if the user is 
 
 Now, if we test it in-game and we use the bandage, it won't play the vfx. That's the first feature done. Next, we want the duration of the effect to vary depending on your character's survival skill. 
 
-Let's create a variable called `duration` and use it in the table of effects we pass in the `applyMagicSource()` function. Then we'll create a function called `getEffectDuration()` that accepts `e.reference` as the argument and returns the duration to the `duration` variable. 
+Let's create two variables `bandageEffect` an `duration` and use it in the table of effects we pass in the `applyMagicSource()` function. The `bandageEffect` needs to be defined outside function `registerBushcraftingRecipe(e)`, as we need to use it later. Assign string `"Bandage"` to the variable. Then we'll create a function called `getEffectDuration()` that accepts `e.reference` as the argument and returns the duration to the `duration` variable. 
 
-```Lua hl_lines="1-6 9 16"
+```Lua
+local bandageEffect = "Bandage"
+
 ---@param ref tes3reference
 ---@return integer duration
 local function getEffectDuration(ref)
@@ -122,7 +124,7 @@ end
 		local duration = getEffectDuration(e.reference)
 		tes3.applyMagicSource({
 			reference = e.reference,
-			name = "Bandage",
+			name = bandageEffect,
 			effects = {
 				{
 					id = tes3.effect.restoreHealth,
@@ -144,7 +146,7 @@ local function getEffectDuration(ref)
 end
 ```
 
-We can get the player's survival skill using the `getSkill()` function in the Skills Module library. We use the `clamp()` function from the `math` library to clamp the skill level between 20 and 40, then assign it to the return value `duration`.
+We can get the player's survival skill using the `getSkill()` function in Skills Module. We use the `clamp()` function from the `math` library to clamp the skill level between 20 and 40, then assign it to the return value `duration`.
 
 ```Lua hl_lines="2-3"
     if ref == tes3.player then
@@ -156,7 +158,7 @@ We can get the player's survival skill using the `getSkill()` function in the Sk
 
 Now, if our character is level 30 in Survival, the effect should last for 30 seconds. And if it's level 100, the duration will be clamped at 40 seconds. 
 
-One final feature we'll add is stopping the healing effect should the bandage user get hit while it's active. To do that, we need to register both the `damaged` and `damagedHandToHand` events. We'll name the callback `removeBandageHealing`. 
+One final feature we'll add is stopping the healing effect if the bandage user gets hit while it's active. To do that, we need to register both the `damaged` and `damagedHandToHand` events. We'll name the callback `removeBandageHealing`. 
 
 ```Lua hl_lines="1-4 7-8"
 ---@param e damagedEventData|damagedHandToHandEventData
@@ -192,7 +194,7 @@ We will add the logic in the loop to check if any of the effects has the name of
 
 ```Lua hl_lines="2-5"
     for _, activeMagicEffect in ipairs(activeMagicEffectList) do
-        if activeMagicEffect.instance.source.name == "Bandage" then
+        if activeMagicEffect.instance.source.name == bandageEffect then
 			activeMagicEffect.effectInstance.timeActive =
 			activeMagicEffect.duration
 		end
@@ -201,9 +203,9 @@ We will add the logic in the loop to check if any of the effects has the name of
 
 Of course, this is not the best way to do it as all effects called `"Bandage"` will then end whenever a `mobile` get damaged, even if the effect is not added by our mod. 
 
-Also, keep in mind that the `source` here is not the bandage object, it is the magic source that we apply to `reference` that uses a bandage. Therefore, if we change the effect `name` here to `"Craftable Bandage"`, we will need to change it here in the condition as well. 
+Also, keep in mind that the `source` here is not the bandage object, it is the magic source that we apply to `reference` that uses a bandage.
 
-So, our mod is done! The only thing left to do right now is to add the metadata file and zip up the mod. We'll do that in the next episode. See you next time!
+So, our mod is done! The only thing left to do right now is to add the metadata file and zip up the mod. We'll do that in the next section.
 
 ??? example "What your main.lua should look like"
     
@@ -231,6 +233,7 @@ So, our mod is done! The only thing left to do right now is to add the metadata 
     })
 
     local bandageId = "AB_alc_Healbandage02"
+    local bandageEffect = "Bandage"
 
     --- @param e CraftingFramework.MenuActivator.RegisteredEvent
     local function registerBushcraftingRecipe(e)

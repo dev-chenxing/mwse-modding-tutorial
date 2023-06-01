@@ -17,7 +17,7 @@ local logging = require("logging.logger")
 
 ## Logging
 
-Besides the forementioned mods, we should also import the logging module. I mentioned before there is another way to do and it's by creating a logger with the logging module. 
+Besides the aforementioned mods, we should also import the logging module. I mentioned before there is another way to do and it's by creating a logger with the logging module. 
 
 ```Lua
 ---@type mwseLogger

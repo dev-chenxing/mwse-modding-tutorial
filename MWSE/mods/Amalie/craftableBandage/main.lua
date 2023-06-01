@@ -21,6 +21,7 @@ local log = logging.new({
 })
 
 local bandageId = "AB_alc_Healbandage02"
+local bandageEffect = "Bandage"
 
 --- @param e CraftingFramework.MenuActivator.RegisteredEvent
 local function registerBushcraftingRecipe(e)
@@ -59,7 +60,7 @@ local function bandageEquipEvent(e)
 		local duration = getEffectDuration(e.reference)
 		tes3.applyMagicSource({
 			reference = e.reference,
-			name = "Bandage",
+			name = bandageEffect,
 			effects = {
 				{
 					id = tes3.effect.restoreHealth,
@@ -88,7 +89,7 @@ local function removeBandageHealing(e)
 	local activeMagicEffectList = e.reference.mobile
 	                              .activeMagicEffectList
 	for _, activeMagicEffect in ipairs(activeMagicEffectList) do
-		if activeMagicEffect.instance.source.name == "Bandage" then
+		if activeMagicEffect.instance.source.name == bandageEffect then
 			activeMagicEffect.effectInstance.timeActive =
 			activeMagicEffect.duration
 		end
