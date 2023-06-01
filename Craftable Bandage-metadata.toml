@@ -1,29 +1,27 @@
 [package]
 name = "Craftable Bandage"
 homepage = "https://github.com/amaliegay/mwse-modding-tutorial"
-authors = [ "Amalie",]
-version = "1.0"
+authors = ["Amalie"]
+version = "1.0.0"
 
 [dependencies]
-assets = [ "MWSE/mods/Amalie/craftableBandage",]
+assets = ["MWSE/mods/Amalie/craftableBandage"]
 
 [dependencies.mwse]
-buildnumber = 3132
+buildnumber = 3238
 
 [dependencies.mods."OAAB_Data"]
-plugin = "OAAB_Data.esm"
-mwse-module = "OAAB"
+version = "^2.1.9"
 url = "https://www.nexusmods.com/morrowind/mods/49042"
 
 [dependencies.mods."Ashfall"]
-mwse-module = "mer.ashfall"
+version = "^3.10.0"
 url = "https://www.nexusmods.com/morrowind/mods/49057"
 
 [dependencies.mods."Crafting Framework"]
-mwse-module = "CraftingFramework"
+version = "^1.12.0"
 url = "https://www.nexusmods.com/morrowind/mods/51009"
 
 [dependencies.mods."Skills Module"]
 mwse-module = "OtherSkills"
 url = "https://www.nexusmods.com/morrowind/mods/46034"
-

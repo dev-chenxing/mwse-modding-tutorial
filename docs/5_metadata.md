@@ -15,7 +15,7 @@ The metadata file mainly includes two types of information. First is the informa
 name = "Craftable Bandage"
 homepage = "https://github.com/amaliegay/mwse-modding-tutorial"
 authors = [ "Amalie",]
-version = "1.0"
+version = "1.0.0"
 ```
 
 The second type of information is the dependencies of your mod. Besides checking if you have other mods installed, the dependency manager can check if assets like Meshes and Textures are missing. It can also check if your the bsa archives are registered, and if MWSE should be updated. You can read more about this in the [doc here](https://mwse.github.io/MWSE/guides/metadata/#dependencies-section).
@@ -27,19 +27,18 @@ Our mod depends on OAAB_Data, Ashfall, Crafting Framework, and Skills Module. So
 assets = [ "MWSE/mods/Amalie/craftableBandage",]
 
 [dependencies.mwse]
-buildnumber = 3132
+buildnumber = 3238
 
 [dependencies.mods."OAAB_Data"]
-plugin = "OAAB_Data.esm"
-mwse-module = "OAAB"
+version = "^2.1.9"
 url = "https://www.nexusmods.com/morrowind/mods/49042"
 
 [dependencies.mods."Ashfall"]
-mwse-module = "mer.ashfall"
+version = "^3.10.0"
 url = "https://www.nexusmods.com/morrowind/mods/49057"
 
 [dependencies.mods."Crafting Framework"]
-mwse-module = "CraftingFramework"
+version = "^1.12.0"
 url = "https://www.nexusmods.com/morrowind/mods/51009"
 
 [dependencies.mods."Skills Module"]
@@ -49,9 +48,9 @@ url = "https://www.nexusmods.com/morrowind/mods/46034"
 
 In `assets`, you should add the file path of the assests of your mod.
 
-If your mod uses recent added feature of mwse, you should specify the `buildnumber` in `mwse`. You can find the `buildnumber` in the first line of `MWSE.log`. It is the number after version number and before "built". For example, the buildnumber is `3132` if the first line is `Morrowind Script Extender v2.1.0-3132 (built Mar 30 2023) hooked.`
+If your mod uses recent added feature of mwse, you should specify the `buildnumber` in `mwse`. You can find the `buildnumber` in the first line of `MWSE.log`. It is the number after version number and before "built". For example, the buildnumber is `3238` if the first line is `Morrowind Script Extender v2.1.0-3132 (built Mar 30 2023) hooked.`
 
-If your mod depends on other mods, you can specify them with `[dependencies.mods."Mod Name"]`. To check if a plugin or master file is installed, write `plugin = plugin name.esp`. To check if the MWSE-Lua scripts are installed, write, for example, `mwse-module = mer.ashfall`. This is checking if the folder `\MWSE\mer\ashfall` is installed. `url` is where you specify where to download said mod.  
+If your mod depends on other mods, you can specify them with `[dependencies.mods."Mod Name"]`. If the mod comes with a metadata file, you can check the version with `version = "^x.x.x"`. If the mod doesn't come with a metadata file, you could check if a plugin or master file is installed, write `plugin = plugin name.esp`. To check if the MWSE-Lua scripts are installed, write, for example, `mwse-module = mer.ashfall`. This is checking if the folder `\MWSE\mer\ashfall` is installed. `url` is where you specify where to download said mod. 
 
 ??? example "What your Craftable Bandage-metadata.toml should look like"
     
@@ -59,26 +58,25 @@ If your mod depends on other mods, you can specify them with `[dependencies.mods
     [package]
     name = "Craftable Bandage"
     homepage = "https://github.com/amaliegay/mwse-modding-tutorial"
-    authors = [ "Amalie",]
-    version = "1.0"
+    authors = ["Amalie"]
+    version = "1.0.0"
 
     [dependencies]
-    assets = [ "MWSE/mods/Amalie/craftableBandage",]
+    assets = ["MWSE/mods/Amalie/craftableBandage"]
 
     [dependencies.mwse]
-    buildnumber = 3132
+    buildnumber = 3238
 
     [dependencies.mods."OAAB_Data"]
-    plugin = "OAAB_Data.esm"
-    mwse-module = "OAAB"
+    version = "^2.1.9"
     url = "https://www.nexusmods.com/morrowind/mods/49042"
 
     [dependencies.mods."Ashfall"]
-    mwse-module = "mer.ashfall"
+    version = "^3.10.0"
     url = "https://www.nexusmods.com/morrowind/mods/49057"
 
     [dependencies.mods."Crafting Framework"]
-    mwse-module = "CraftingFramework"
+    version = "^1.12.0"
     url = "https://www.nexusmods.com/morrowind/mods/51009"
 
     [dependencies.mods."Skills Module"]
