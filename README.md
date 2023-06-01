@@ -21,4 +21,4 @@ The mod requires [OAAB_Data](https://www.nexusmods.com/morrowind/mods/49042), [S
 - [R-Zero](https://github.com/Reizeron), for the MWSE-Lua logo
 - [Uncle Boss](https://www.marxists.org/), for editing and proofreading.
 
-Next - [Episode 1: Introduction, Variables, Functions, Event-Based Programming](https://amaliegay.github.io/mwse-modding-tutorial/1_introduction/)
+Next - [Section 1: Introduction, Variables, Functions, Event-Based Programming](https://amaliegay.github.io/mwse-modding-tutorial/1_introduction/)

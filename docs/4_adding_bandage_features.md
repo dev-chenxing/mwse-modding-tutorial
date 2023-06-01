@@ -1,4 +1,4 @@
-# Episode 4: Adding More Bandages Features
+# Section 4: Adding More Bandages Features
 
 Welcome back to another episode of MWSE Modding Tutorial. So our mod is almost complete. First we'll look at some scripts from OAAB_Data and then add some additional features for bandages ourselves.
 
@@ -369,4 +369,4 @@ So, our mod is done! The only thing left to do right now is to add the metadata 
     event.register(tes3.event.modConfigReady, onModConfigReady)
     ```
 
-Next - [Episode 5: Metadata Files](https://amaliegay.github.io/mwse-modding-tutorial/5_metadata/)
+Next - [Section 5: Metadata Files](https://amaliegay.github.io/mwse-modding-tutorial/5_metadata/)

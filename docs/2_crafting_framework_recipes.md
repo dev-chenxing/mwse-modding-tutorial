@@ -1,4 +1,4 @@
-# Episode 2: Modules, Logging, Crafting Framework Recipes
+# Section 2: Modules, Logging, Crafting Framework Recipes
 
 Welcome back, today we're gonna learn about modules, logging, function arguments, lists, Crafting Framework recipes, and we are going to test our script in game.
 
@@ -178,4 +178,4 @@ That's it for today! You've officially made your first MWSE mod! But both the tu
 				{ priority = 100 }) -- before crafting framework
     ```
 
-Next - [Episode 3: Mod Config Menu, If Statements, Concatenating Strings](https://amaliegay.github.io/mwse-modding-tutorial/3_mcm/)
+Next - [Section 3: Mod Config Menu, If Statements, Concatenating Strings](https://amaliegay.github.io/mwse-modding-tutorial/3_mcm/)

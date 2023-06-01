@@ -1,4 +1,4 @@
-# Episode 1: Introduction, Variables, Functions, Event-Based Programming
+# Section 1: Introduction, Variables, Functions, Event-Based Programming
 
 ## Introduction
 
@@ -153,4 +153,4 @@ That's it for today. You've learned how to comment, how to create variables and 
                 { priority = 100 }) -- before crafting framework
     ```
 
-Next - [Episode 2: Libraries, Logging, Crafting Framework Recipes](https://amaliegay.github.io/mwse-modding-tutorial/2_crafting_framework_recipes/)
+Next - [Section 2: Libraries, Logging, Crafting Framework Recipes](https://amaliegay.github.io/mwse-modding-tutorial/2_crafting_framework_recipes/)

@@ -100,15 +100,6 @@ local function initializedCallback(e)
 	if not config.enabled then
 		return
 	end
-	if not ashfall then
-		return
-	end
-	if not CraftingFramework then
-		return
-	end
-	if not skillModule then
-		return
-	end
 	event.register("Ashfall:ActivateBushcrafting:Registered",
 	               registerBushcraftingRecipe)
 	event.register("OAAB:equip", bandageEquipEvent)
@@ -143,6 +134,7 @@ local function onModConfigReady()
 	settings:createDropdown({
 		label = "Log Level",
 		options = {
+			{ label = "TRACE", value = "TRACE" },
 			{ label = "DEBUG", value = "DEBUG" },
 			{ label = "INFO", value = "INFO" },
 		},

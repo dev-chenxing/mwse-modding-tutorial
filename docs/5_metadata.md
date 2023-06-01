@@ -1,4 +1,4 @@
-# Episode 5: Metadata File
+# Section 5: Metadata File
 
 Welcome back! When we last left off, we have finished the mod. All we have to do right now is to add a metadata file for our mod. 
 
