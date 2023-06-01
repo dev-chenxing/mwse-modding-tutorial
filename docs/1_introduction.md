@@ -2,9 +2,9 @@
 
 ## Introduction
 
-First, open up [Visual Studio Code](https://code.visualstudio.com/). If you don't have it, download and install it.
+First, open up [Visual Studio Code](https://code.visualstudio.com/). If you don't have it, download and install it. This is the preferred IDE for MWSE modding.
 
-Once you have your VSCode open, click **Open Folder** then navigate to `Morrowind\Data Files\MWSE`. and **select the folder**. You will be asked, "Do you trust the authors of the files in this folder?" Click **"Yes, I trust the authors"**. 
+Once you have VSCode open, click **File** -> **Open Folder...**, then navigate to `Morrowind\Data Files\MWSE`, and **select the folder**. You will be asked, "Do you trust the authors of the files in this folder?" Click **"Yes, I trust the authors"**. 
 
 If you don't already have the Lua and vscode-lua-format extensions installed, you'll see popups at the bottom left corner of the screen asking you to install them. Install both of them. 
 
@@ -12,19 +12,17 @@ If you don't already have the Lua and vscode-lua-format extensions installed, yo
 
 Next, we'll save this as workspace. Click **File** -> **Save Workspace As...** **Save**.
 
-Now, we are going to create the folder for our MWSE mod. On the left side of the screen, we have the folders within the `\MWSE` folder. Mods usually go under the `\mods` folder. Expand that folder. So long as your mod has a `main.lua`, you can put it anywhere within the `\mods` folder. However, we will use the `mods/modderName/modName` naming convention. This avoids conflicting files and keeps everything tidy.
+Now, we are going to create the folder for our MWSE mod. On the left side of the screen, we have the folders within the `MWSE` folder. Mods usually go under the `mods` folder. Expand that folder. So long as your mod has a `main.lua`, you can put it anywhere within the `mods` folder. However, we will use the `mods/modderName/modName` naming convention. This avoids conflicting files and keeps everything tidy.
 
-Right Click on `\mods`, select **New Folder...**. Here, you need to enter your modder name. I am Amalie so I'll type `Amalie` here. Then, right click on the folder you just created, select **New Folder...** again. This time we need to enter the name for the mod that we will be creating, `craftableBandage`.
+For example, in this mod, the path of main.lua will be `MWSE/mods/Amalie/craftableBandage/main.lua`.
 
-You can name it any way you want, I personally like using camelCase, that is, no separator between words, first letter lowercased, and the first letter of all other words capitalized. But you can use snake_case `craftable_bandage` or Normal `Craftable Bandage`. Just remember, don't put a dot in your folder name. For example, `craftable.bandage`.
-
-Now, right click on `\craftableBandage`, select **New File...**, and name it `main.lua`. This is the the main file of your mod and it must be named `main.lua`.
+You can name your folders any way you want, we used camelCase, that is, no separator between words, first letter lowercased, and the first letter of all other words capitalized. But you can use snake_case `craftable_bandage` or Normal `Craftable Bandage`. Just remember, don't put a dot in your folder name. Do not do this `craftable.bandage`, for example.
 
 ## Comments
 
-Before we do any coding, I would like to tell you how to comment in Lua first. Oftentimes, you want to add information about the mod and its author at the top of the script.
+Before we do any coding, let's learn about how to comment in Lua first. Oftentimes, you want to add information about the mod and its author at the top of the script.
 
-When you run Lua code, comments will be skipped. Any line starting with a double dash `--` is considered a comment. This is a single line of comment.
+When Lua code is run, comments will be skipped. Any line starting with a double dash `--` is considered a comment. This is a single line of comment.
 
 ```lua
 -- Mod: Craftable Bandage
@@ -43,9 +41,7 @@ You can also do multi-line comment with ``--[[]]``. That is, double dash followe
 ```
 ## Variables
 
-Now I'm gonna show you how to create a variable in Lua. A variable holds some type of data which can be manipulated and referred to. This mod is Craftable Bandage, so we will create a local variable called `bandageId` and set it to the id of the OAAB bandages.
-
-To find the id of the OAAB bandages, load `OAAB_Data.esm` in The Construction Set. The bandages are located under the "Alchemy" tab. There are actually two bandage objects in OAAB, but I don't want to create two recipes for essentially the same object so I'm just gonna choose the second one for crafting.
+Now let's learn how to create a variable in Lua. A variable holds some type of data which can be manipulated and referred to. This mod is Craftable Bandage, so we will create a local variable called `bandageId` and set it to the id of one of the OAAB bandages.
 
 ```lua
 local bandageId = "AB_alc_HealBandage02"
@@ -53,7 +49,7 @@ local bandageId = "AB_alc_HealBandage02"
 
 In Lua, variables are global by default but you probably don't want that most of the time. The `local` here specifies that this is a local variable, as opposed to a global variable.
 
-`bandageId` is the variable name. Different people use different naming conventions. I tend to use camelCase for everything.
+`bandageId` is the variable name. 
 
 The equal symbol `=` is the assignment operator and we're assigning a string to `bandageId`. A string is a collection of characters like `AB_alc_HealBandage02` and it is enclosed in double or single quotation marks. 
 
@@ -69,7 +65,7 @@ local function registerBushcraftingRecipe()
 end
 ```
 
-You can see in our IDE, both the function and the variable we just created are greyed out. Hovering over it, it tells us that they are unused function and unused local. That's because we haven't called them or used them anywhere in the script yet. Let's do that now.
+If you are following along the tutorial, you can see in the IDE, both the function and the variable we just created are greyed out. Hovering over it, it tells us that they are unused function and unused local. That's because we haven't called them or used them anywhere in the script yet. Let's do that now.
 
 To call a function, type the name of the function followed by a pair of parentheses.
 
@@ -83,17 +79,17 @@ Right now, when the function is called, it's not doing anything. So let's use th
 mwse.log("[Craftable Bandage] Registering bushcrafting recipe...")
 ```
 
-This is one of the most common ways to write information to MWSE.log and we will look at another way to do logging later. For now, let's run Morrowind.exe and check the log. You can see `[Craftable Bandage] registering bushcrafting recipe...` in the log here. 
+This is one of the most common ways to write information to MWSE.log and we will look at another way (a better way) to do logging later. For now, let's run Morrowind.exe and check the log. You should be able to see `[Craftable Bandage] registering bushcrafting recipe...` in the log. 
 
-MWSE.log can hold lots of useful information for modders if they know how to read and write it. The line starts with `[Craftable Bandage]` is the line our script wrote. Lines starts with `[Crafting Framework]` and `[Ashfall]` are the lines Crafting Framework and Ashfall wrote. Our line printed before CF is implying that our function was run before CF and Ashfall did their things. 
+MWSE.log can hold lots of useful information for modders if they know how to read and write it. The line starts with `[Craftable Bandage]` is the line our script wrote. Lines starts with `[Crafting Framework]` and `[Ashfall]` are the lines Crafting Framework (CF) and Ashfall wrote. Our line printed before CF implies that our function was run before CF and Ashfall started running. 
 
-But we want to register the bandage recipe when CF is registering bushcrafting recipes. How do we do that? Well, let me introduce you to event-driven programming. 
+But we want to register the bandage recipe when CF is registering bushcrafting recipes. How do we do that? Well, let's learn about event-driven programming. 
 
 ## Event-Driven Programming
 
 In event-driven programming, or event-based programming, events are "fired" when an action takes place. Your code listens for them and handles them accordingly. You can look up all the events MWSE provides [here](https://mwse.github.io/MWSE/events/initialized/).
 
-Let's look at the `initialized` event. This fires when game code has finished initializing, and all masters and plugins have been loaded. Let's copy this code and paste it in our main.lua.
+Let's look at the `initialized` event. This fires when game code has finished initializing, and all masters and plugins have been loaded. Let's copy the example code provided in the document page and paste it in our main.lua.
 
 ```lua
 --- @param e initializedEventData
@@ -102,7 +98,7 @@ end
 event.register(tes3.event.initialized, initializedCallback)
 ```
 
-Here, `tes3.event.initialized` is the event name and `initializedCallback` is the function to call when `initialized` event is fired. Same as before I will write some information to print.
+Here, `tes3.event.initialized` is the event name and `initializedCallback` is the function to call when `initialized` event is fired. Same as before let's write some information to print out to MWSE.log.
 
 ```lua
 mwse.log("[Craftable Bandage] Initialized")
@@ -114,9 +110,9 @@ Usually, you want to register your mod's events inside `initializedCallback`. An
 event.register("Ashfall:ActivateBushcrafting:Registered", registerBushcraftingRecipe)
 ```
 
-What this means is when Ashfall is registering their bushcrafting recipes, our `registerBushcraftingRecipe()` function will run. So let's test this. 
+What this means is when Ashfall is registering their bushcrafting recipes, our `registerBushcraftingRecipe()` function will run. So let's test this. Launch the game and read the MWSE.log. 
 
-If we search the log for "Bandage", you'll could only find the `"Initialized"` log but not the `"registering recipe"` log. That's because, from MWSE.log, you know that our mod was initialized after Crafting Framework finished registering all the MenuActivator. That's why our event callback never runs. 
+If we search the log for "Bandage", you'll could only find the `"Initialized"` log but not the `"registering recipe"` log. That's because, the print order of the logs, you know that our mod was initialized after Crafting Framework finished registering all the MenuActivator. That's why our event callback never runs. 
 
 We can fix this by tweaking the `priority` when registering our `initialized` event. 
 
@@ -124,11 +120,11 @@ We can fix this by tweaking the `priority` when registering our `initialized` ev
 event.register(tes3.event.initialized, initializedCallback, { priority = 100 })
 ```
 
-Functions registered with higher `priority` will run first. The default is 0. We setting the `priority` to be anything higher than 0 can make sure our `initializedCallback` will run before The Crafting Framework registered all the recipes. 
+Functions registered with higher `priority` will run first. The default is 0. Setting the `priority` to be anything higher than 0 can make sure our `initializedCallback` will run before The Crafting Framework registered all of the recipes. 
 
-Let's test it again. Now as you can see from the log here, our bandage recipe was registered right when The Crafting Framework was registering Ashfall's Bushcrafting MenuActivator.
+Launch the game again. Now you should be able to see in your log that our bandage recipe was registered right when The Crafting Framework was registering Ashfall's Bushcrafting MenuActivator.
 
-That's it for today. You've learned how to comment, how to create variables and functions, and the concept of event-driven programming. See you in the next video.
+That's it for today. You've learned how to comment, how to create variables and functions, and the concept of event-driven programming. See you in the next section.
 
 ??? example "What your main.lua should look like"
     
