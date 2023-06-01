@@ -37,7 +37,7 @@ url = "https://www.nexusmods.com/morrowind/mods/49042"
 version = "^3.10.0"
 url = "https://www.nexusmods.com/morrowind/mods/49057"
 
-[dependencies.mods."Crafting Framework"]
+[dependencies.mods."The Crafting Framework"]
 version = "^1.12.0"
 url = "https://www.nexusmods.com/morrowind/mods/51009"
 
@@ -75,7 +75,7 @@ If your mod depends on other mods, you can specify them with `[dependencies.mods
     version = "^3.10.0"
     url = "https://www.nexusmods.com/morrowind/mods/49057"
 
-    [dependencies.mods."Crafting Framework"]
+    [dependencies.mods."The Crafting Framework"]
     version = "^1.12.0"
     url = "https://www.nexusmods.com/morrowind/mods/51009"
 
