@@ -178,4 +178,4 @@ That's it for today! You've officially made your first MWSE mod! But both the tu
 				{ priority = 100 }) -- before crafting framework
     ```
 
-Next - [Section 3: Mod Config Menu, If Statements, Concatenating Strings](https://amaliegay.github.io/mwse-modding-tutorial/3_mcm/)
+Next - [Section 3: Mod Config Menu, If Statements, Concatenating Strings](https://dev-chenxing.github.io/mwse-modding-tutorial/3_mcm/)

@@ -27,7 +27,7 @@ local function initializedCallback(e)
 	               registerBushcraftingRecipe)
 ```
 
-This is an example code. We don't actually need them, as the dependency manager will do the same thing. We will discuss this in [section 5](https://amaliegay.github.io/mwse-modding-tutorial/5_metadata/).
+This is an example code. We don't actually need them, as the dependency manager will do the same thing. We will discuss this in [section 5](https://dev-chenxing.github.io/mwse-modding-tutorial/5_metadata/).
 
 ## Mod Config Menu
 
@@ -270,4 +270,4 @@ Today, you've learned what an if statement is, how to concatenate strings, and m
     event.register(tes3.event.modConfigReady, onModConfigReady)
     ```
 
-Next - [Section 4: Adding More Bandages Features](https://amaliegay.github.io/mwse-modding-tutorial/4_adding_bandage_features/)
+Next - [Section 4: Adding More Bandages Features](https://dev-chenxing.github.io/mwse-modding-tutorial/4_adding_bandage_features/)

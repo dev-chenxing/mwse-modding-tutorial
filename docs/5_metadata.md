@@ -13,7 +13,7 @@ The metadata file mainly includes two types of information. First is the informa
 ```toml
 [package]
 name = "Craftable Bandage"
-homepage = "https://github.com/amaliegay/mwse-modding-tutorial"
+homepage = "https://github.com/dev-chenxing/mwse-modding-tutorial"
 authors = [ "Amalie",]
 version = "1.0.0"
 ```
@@ -57,7 +57,7 @@ If your mod depends on other mods, you can specify them with `[dependencies.mods
     ```toml linenums="1"
     [package]
     name = "Craftable Bandage"
-    homepage = "https://github.com/amaliegay/mwse-modding-tutorial"
+    homepage = "https://github.com/dev-chenxing/mwse-modding-tutorial"
     authors = ["Amalie"]
     version = "1.0.0"
 

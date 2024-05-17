@@ -372,4 +372,4 @@ So, our mod is done! The only thing left to do right now is to add the metadata 
     event.register(tes3.event.modConfigReady, onModConfigReady)
     ```
 
-Next - [Section 5: Metadata Files](https://amaliegay.github.io/mwse-modding-tutorial/5_metadata/)
+Next - [Section 5: Metadata Files](https://dev-chenxing.github.io/mwse-modding-tutorial/5_metadata/)

@@ -2,8 +2,8 @@ site_name: MWSE Modding Tutorial - Based Morrowind Modding now using Lua!
 site_description: Learn to use MWSE-Lua in this tutorial for beginners! You will learn the basics of MWSE-Lua and make a MWSE-Lua mod step-by-step.
 site_author: Amalie
 
-repo_url: https://github.com/amaliegay/mwse-modding-tutorial/
-repo_name: amaliegay/mwse-modding-tutorial
+repo_url: https://github.com/dev-chenxing/mwse-modding-tutorial/
+repo_name: dev-chenxing/mwse-modding-tutorial
 
 theme:
   name: material
@@ -50,5 +50,5 @@ extra:
     - icon: fontawesome/brands/youtube
       link: https://youtube.com/
     - icon: fontawesome/brands/github
-      link: https://github.com/amaliegay
+      link: https://github.com/dev-chenxing
 
